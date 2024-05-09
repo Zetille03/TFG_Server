@@ -27,4 +27,5 @@ public interface MapStructMapper {
     ActividadOfertante actividadOfertanteDTOToActividadOfertante(ActividadOfertanteDTO actividadOfertanteDTO);
 
 
+
 }

@@ -3,6 +3,7 @@ package com.tfgserver.tfgserver.entities.consumidor;
 
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
+@Data
 @Table(name = "actividadesconsumidores")
 public class ActividadConsumidor {
     @Id
@@ -28,6 +30,10 @@ public class ActividadConsumidor {
 
     @Basic
     @Column
+    private String categoria;
+
+    @Basic
+    @Column
     private int numeroPlazas;
 
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE} )
@@ -36,6 +42,8 @@ public class ActividadConsumidor {
 
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE} )
     @JoinColumn(name="idOfertante")
-    private Ofertante ofertante;
+    private Ofertante ofertanteActividadConsumidor;
+
+
 
 }

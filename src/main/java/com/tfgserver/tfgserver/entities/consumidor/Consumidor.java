@@ -1,24 +1,30 @@
 package com.tfgserver.tfgserver.entities.consumidor;
 
 
+import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
+import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
+@Data
 @Table(name = "consumidores")
 public class Consumidor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name="idConsumidor")
     private int idConsumidor;
 
     @Basic
-    @Column
+    @Column(unique = true)
     private String username;
 
     @Basic
@@ -30,7 +36,23 @@ public class Consumidor {
     private String password;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,
-            mappedBy = "consumidores")
-    private List<ActividadConsumidor> listaActividadesConsumidor;
+            mappedBy = "consumidor", fetch = FetchType.EAGER)
+    private List<ActividadConsumidor> listaActividadesDeConsumidor;
 
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,
+            mappedBy = "consumidor", fetch = FetchType.EAGER)
+    private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
+
+//    @Override
+//    public String toString() {
+//        return "Consumidor{" +
+//                "idConsumidor=" + idConsumidor +
+//                ", username='" + username + '\'' +
+//                ", email='" + email + '\'' +
+//                ", password='" + password + '\'' +
+//                ", listaActividadesDeConsumidor=" + ((listaActividadesDeConsumidor!=null)?listaActividadesDeConsumidor.size():0) +
+//                ", listaConsumidoresActividadOfertantes=" +  ((listaConsumidoresActividadOfertantes!=null)?listaConsumidoresActividadOfertantes.size():0) +
+//                '}';
+//    }
 }

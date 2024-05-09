@@ -18,6 +18,9 @@ public class ActividadConsumidorDTO {
     @JsonProperty("fechaFin")
     private Date fechaFin;
 
+    @JsonProperty("categoria")
+    private String categoria;
+
     @JsonProperty("numeroPlazas")
     private int numeroPlazas;
 
