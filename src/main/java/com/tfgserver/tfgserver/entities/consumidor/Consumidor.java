@@ -28,7 +28,7 @@ public class Consumidor {
     private String username;
 
     @Basic
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Basic

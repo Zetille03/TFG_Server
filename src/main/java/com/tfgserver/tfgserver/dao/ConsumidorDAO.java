@@ -16,8 +16,8 @@ public class ConsumidorDAO {
     @Autowired
     private ConsumidorRepository repository;
 
-    public void save(Consumidor consumidor){
-        repository.save(consumidor);
+    public Consumidor save(Consumidor consumidor){
+        return repository.save(consumidor);
     }
 
     public void delete(Consumidor consumidor){

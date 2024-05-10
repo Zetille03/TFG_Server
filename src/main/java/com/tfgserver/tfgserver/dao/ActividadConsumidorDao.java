@@ -13,8 +13,8 @@ public class ActividadConsumidorDao {
     @Autowired
     private ActividadConsumidorRepository repository;
 
-    public void save(ActividadConsumidor actividadConsumidor){
-        repository.save(actividadConsumidor);
+    public ActividadConsumidor save(ActividadConsumidor actividadConsumidor){
+       return repository.save(actividadConsumidor);
     }
 
     public void delete(ActividadConsumidor actividadConsumidor){

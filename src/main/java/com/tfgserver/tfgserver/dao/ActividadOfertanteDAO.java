@@ -13,8 +13,8 @@ public class ActividadOfertanteDAO {
     @Autowired
     private ActividadOfertanteRepository repository;
 
-    public void save(ActividadOfertante actividadOfertante){
-        repository.save(actividadOfertante);
+    public ActividadOfertante save(ActividadOfertante actividadOfertante){
+        return repository.save(actividadOfertante);
     }
 
     public void delete(ActividadOfertante actividadOfertante){

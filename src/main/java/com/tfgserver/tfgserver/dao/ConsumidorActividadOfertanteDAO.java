@@ -15,8 +15,8 @@ public class ConsumidorActividadOfertanteDAO {
     @Autowired
     private ConsumidorActividadOfertanteRepository repository;
 
-    public void save(ConsumidorActividadOfertante consumidorActividadOfertante){
-        repository.save(consumidorActividadOfertante);
+    public ConsumidorActividadOfertante save(ConsumidorActividadOfertante consumidorActividadOfertante){
+        return repository.save(consumidorActividadOfertante);
     }
 
     public void delete(ConsumidorActividadOfertante consumidorActividadOfertante){
