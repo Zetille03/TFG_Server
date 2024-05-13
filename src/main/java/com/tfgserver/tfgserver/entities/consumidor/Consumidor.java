@@ -24,11 +24,11 @@ public class Consumidor {
     private int idConsumidor;
 
     @Basic
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String username;
 
     @Basic
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String email;
 
     @Basic

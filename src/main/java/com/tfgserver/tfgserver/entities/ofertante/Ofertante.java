@@ -22,11 +22,11 @@ public class Ofertante {
     private int idOfertante;
 
     @Basic
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String username;
 
     @Basic
-    @Column
+    @Column(unique = true,nullable = false)
     private String email;
 
     @Basic
