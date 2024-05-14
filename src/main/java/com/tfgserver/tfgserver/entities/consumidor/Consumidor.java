@@ -4,6 +4,7 @@ package com.tfgserver.tfgserver.entities.consumidor;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,14 +26,17 @@ public class Consumidor {
 
     @Basic
     @Column(unique = true,nullable = false)
+    @NotEmpty
     private String username;
 
     @Basic
     @Column(unique = true,nullable = false)
+    @NotEmpty
     private String email;
 
     @Basic
     @Column
+    @NotEmpty
     private String password;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,

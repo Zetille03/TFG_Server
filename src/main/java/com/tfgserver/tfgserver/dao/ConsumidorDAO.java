@@ -36,6 +36,14 @@ public class ConsumidorDAO {
         return repository.existsById(id);
     }
 
+    public Consumidor checkLogin(String user,String password){
+        for(Consumidor consumidor : repository.findAll())
+        {
+            if(consumidor.getUsername().equals(user) && consumidor.getPassword().equals(password)) return consumidor;
+        }
+        return null;
+    }
+
     public List<Consumidor> getAllConsumidores(){
         return Lists.newArrayList(repository.findAll());
     }

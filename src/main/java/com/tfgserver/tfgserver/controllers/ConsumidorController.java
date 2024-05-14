@@ -18,6 +18,11 @@ public class ConsumidorController {
         return consumidorDAO.getAllConsumidores();
     }
 
+    @GetMapping("/consumidor/comprobar-login")
+    public Consumidor checkLogin(@RequestParam String user, @RequestParam String password){
+        return consumidorDAO.checkLogin(user, password);
+    }
+
     @PostMapping("/consumidor/save")
     public Consumidor save(@RequestBody Consumidor consumidor){
         return consumidorDAO.save(consumidor);

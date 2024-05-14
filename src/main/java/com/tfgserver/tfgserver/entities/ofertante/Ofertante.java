@@ -3,6 +3,7 @@ package com.tfgserver.tfgserver.entities.ofertante;
 
 import com.tfgserver.tfgserver.entities.consumidor.ActividadConsumidor;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,14 +24,17 @@ public class Ofertante {
 
     @Basic
     @Column(unique = true,nullable = false)
+    @NotEmpty
     private String username;
 
     @Basic
     @Column(unique = true,nullable = false)
+    @NotEmpty
     private String email;
 
     @Basic
     @Column
+    @NotEmpty
     private String password;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,
