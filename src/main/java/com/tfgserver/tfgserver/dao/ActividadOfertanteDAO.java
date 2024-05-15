@@ -1,6 +1,7 @@
 package com.tfgserver.tfgserver.dao;
 
 import com.google.common.collect.Lists;
+import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.repositories.ActividadOfertanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,12 @@ public class ActividadOfertanteDAO {
         return repository.existsById(id);
     }
 
-    public List<ActividadOfertante> getAllConsumidores(){
+    public List<ActividadOfertante> getAllActividadesOfertantes(){
         return Lists.newArrayList(repository.findAll());
+    }
+
+    public ActividadOfertante getById(int id){
+        return (repository.findById(id).isPresent())?repository.findById(id).get():null;
     }
 
 }

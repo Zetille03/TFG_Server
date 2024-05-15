@@ -2,6 +2,7 @@ package com.tfgserver.tfgserver.dao;
 
 import com.google.common.collect.Lists;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
+import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
 import com.tfgserver.tfgserver.repositories.ConsumidorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -46,6 +47,10 @@ public class ConsumidorDAO {
 
     public List<Consumidor> getAllConsumidores(){
         return Lists.newArrayList(repository.findAll());
+    }
+
+    public Consumidor getById(int id){
+        return (repository.findById(id).isPresent())?repository.findById(id).get():null;
     }
 
 

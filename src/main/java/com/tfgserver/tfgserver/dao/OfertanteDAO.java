@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OfertanteDAO {
@@ -33,7 +34,20 @@ public class OfertanteDAO {
         return repository.existsById(id);
     }
 
-    public List<Ofertante> getAllConsumidores(){
+    public List<Ofertante> getAllOfertantes(){
         return Lists.newArrayList(repository.findAll());
+    }
+
+    public Ofertante getById(int id){
+        return (repository.findById(id).isPresent())?repository.findById(id).get():null;
+    }
+
+
+    public Ofertante checkLogin(String user, String password){
+        for(Ofertante ofertante : repository.findAll())
+        {
+            if(ofertante.getUsername().equals(user) && ofertante.getPassword().equals(password)) return ofertante;
+        }
+        return null;
     }
 }

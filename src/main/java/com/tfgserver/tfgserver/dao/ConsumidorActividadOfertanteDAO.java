@@ -2,6 +2,7 @@ package com.tfgserver.tfgserver.dao;
 
 import com.google.common.collect.Lists;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
+import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.repositories.ActividadOfertanteRepository;
 import com.tfgserver.tfgserver.repositories.ConsumidorActividadOfertanteRepository;
@@ -35,7 +36,11 @@ public class ConsumidorActividadOfertanteDAO {
         return repository.existsById(id);
     }
 
-    public List<ConsumidorActividadOfertante> getAllConsumidorActividadOfertantes(){
+    public List<ConsumidorActividadOfertante> getAllConsumidoresActividadesOfertantes(){
         return Lists.newArrayList(repository.findAll());
+    }
+
+    public ConsumidorActividadOfertante getById(int id){
+        return (repository.findById(id).isPresent())?repository.findById(id).get():null;
     }
 }
