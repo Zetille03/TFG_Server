@@ -41,8 +41,6 @@ public class ConsumidorController {
         updateOfertante.setEmail(consumidor.getEmail());
         updateOfertante.setUsername(consumidor.getUsername());
         updateOfertante.setPassword(consumidor.getPassword());
-        updateOfertante.setListaActividadesDeConsumidor(consumidor.getListaActividadesDeConsumidor());
-        updateOfertante.setListaConsumidoresActividadOfertantes(consumidor.getListaConsumidoresActividadOfertantes());
 
         return consumidorDAO.save(updateOfertante);
     }

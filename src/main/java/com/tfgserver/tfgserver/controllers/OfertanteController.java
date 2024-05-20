@@ -40,8 +40,6 @@ public class OfertanteController {
         updateOfertante.setEmail(ofertante.getEmail());
         updateOfertante.setUsername(ofertante.getUsername());
         updateOfertante.setPassword(ofertante.getPassword());
-        updateOfertante.setListaActividadesOfertante(ofertante.getListaActividadesOfertante());
-        updateOfertante.setListaActividadesConsumidor(ofertante.getListaActividadesConsumidor());
 
 
         return ofertanteDAO.save(updateOfertante);

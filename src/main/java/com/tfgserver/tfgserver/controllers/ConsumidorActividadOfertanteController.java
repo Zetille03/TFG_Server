@@ -28,9 +28,14 @@ public class ConsumidorActividadOfertanteController {
         consumidorActividadOfertanteDAO.deleteById(id);
     }
 
-//    @PutMapping("/consumidor-actividad-ofertante/update")
-//    public ConsumidorActividadOfertante update(@RequestBody ConsumidorActividadOfertante consumidorActividadOfertante){
-//        return consumidorActividadOfertanteDAO.save(consumidorActividadOfertante);
-//    }
+    @PutMapping("/consumidor-actividad-ofertante/update")
+    public ConsumidorActividadOfertante update(@RequestParam int id,@RequestBody ConsumidorActividadOfertante consumidorActividadOfertante){
+        ConsumidorActividadOfertante updateConsumidorActividadOfertante = consumidorActividadOfertanteDAO.getById(id);
+
+        updateConsumidorActividadOfertante.setConsumidor(consumidorActividadOfertante.getConsumidor());
+        updateConsumidorActividadOfertante.setActividadOfertante(consumidorActividadOfertante.getActividadOfertante());
+
+        return consumidorActividadOfertanteDAO.save(updateConsumidorActividadOfertante);
+    }
 
 }

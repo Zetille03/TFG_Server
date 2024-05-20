@@ -1,6 +1,7 @@
 package com.tfgserver.tfgserver.entities.consumidor;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import jakarta.persistence.*;
@@ -39,13 +40,15 @@ public class Consumidor {
     @NotEmpty
     private String password;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,
+    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
             mappedBy = "consumidor", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("consumidor")
     private List<ActividadConsumidor> listaActividadesDeConsumidor;
 
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,
+    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
             mappedBy = "consumidor", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("consumidor")
     private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
 
 //    @Override

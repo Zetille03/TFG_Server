@@ -1,5 +1,7 @@
 package com.tfgserver.tfgserver.entities.ofertante;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import jakarta.persistence.*;
@@ -24,10 +26,15 @@ public class ActividadOfertante {
 
     @Basic
     @Column
+    private String titulo;
+
+    @Basic
+    @Column
     private String descripcion;
 
     @Basic
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Timestamp dueDate;
 
     @Basic
@@ -39,11 +46,13 @@ public class ActividadOfertante {
     private int numeroPlazas;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE} )
+    @ManyToOne(cascade = {/*CascadeType.PERSIST,*/CascadeType.MERGE} )
     @JoinColumn(name="idOfertante")
+    @JsonIgnoreProperties("listaActividadesOfertante")
     private Ofertante ofertante;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,
+    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
             mappedBy = "actividadOfertante",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("listaActividadesConsumidor")
     private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
 }
