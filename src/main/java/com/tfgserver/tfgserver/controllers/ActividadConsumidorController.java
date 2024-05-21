@@ -1,7 +1,7 @@
 package com.tfgserver.tfgserver.controllers;
 
 import com.tfgserver.tfgserver.dao.ActividadConsumidorDao;
-Perimport com.tfgserver.tfgserver.dao.ConsumidorDAO;
+import com.tfgserver.tfgserver.dao.ConsumidorDAO;
 import com.tfgserver.tfgserver.entities.consumidor.ActividadConsumidor;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
