@@ -1,12 +1,17 @@
 package com.tfgserver.tfgserver.controllers;
 
 import com.tfgserver.tfgserver.dao.ActividadConsumidorDao;
+import com.tfgserver.tfgserver.dao.ActividadOfertanteDAO;
+import com.tfgserver.tfgserver.dao.ConsumidorActividadOfertanteDAO;
 import com.tfgserver.tfgserver.dao.ConsumidorDAO;
+import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.consumidor.ActividadConsumidor;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,6 +24,11 @@ public class ActividadConsumidorController {
 
     @Autowired
     private ConsumidorDAO consumidorDAO;
+
+    @Autowired
+    private ConsumidorActividadOfertanteDAO consumidorActividadOfertanteDAO;
+    @Autowired
+    private ActividadOfertanteDAO actividadOfertanteDAO;
 
     @GetMapping("/actividad-consumidor/get-all")
     public List<ActividadConsumidor> getAllActividadesConsumidor(){
@@ -33,6 +43,19 @@ public class ActividadConsumidorController {
             if(a.getConsumidor().equals(consumidor))actividades.add(a);
         }
         return actividades;
+    }
+
+
+
+    @GetMapping("/actividad-ofertante/get-apuntado")
+    public List<ActividadOfertante> getActividadesOfertantesByConsumidor(@RequestParam("consumidorId") int idConsumidor){
+        List<ConsumidorActividadOfertante> actividadesRelaciones = consumidorActividadOfertanteDAO.getAllConsumidoresActividadesOfertantes();
+        List<ActividadOfertante> actividadesOfertantes = new ArrayList<>();
+        for(ConsumidorActividadOfertante a : actividadesRelaciones){
+            if(a.getConsumidor().getIdConsumidor()==idConsumidor)
+                actividadesOfertantes.add(actividadOfertanteDAO.getById(a.getActividadOfertante().getIdActividadOfertante()));
+        }
+        return actividadesOfertantes;
     }
 
 

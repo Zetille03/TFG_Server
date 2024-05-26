@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Getter
@@ -16,7 +18,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @Table(name = "actividadesconsumidores")
-public class ActividadConsumidor {
+public class ActividadConsumidor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idActividadesConsumidores")
@@ -32,11 +34,10 @@ public class ActividadConsumidor {
 
     @Basic
     @Column
-    private Timestamp dueDate;
+    private Date dueDate;
 
     @Basic
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private String categoria;
 
     @Basic
@@ -52,6 +53,8 @@ public class ActividadConsumidor {
     @JoinColumn(name="idOfertante")
     @JsonIgnoreProperties("listaActividadesConsumidor")
     private Ofertante ofertanteActividadConsumidor;
+
+
 
 
 

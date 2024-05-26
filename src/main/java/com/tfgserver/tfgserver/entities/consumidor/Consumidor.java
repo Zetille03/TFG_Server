@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.common.aliasing.qual.Unique;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "consumidores")
-public class Consumidor {
+public class Consumidor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idConsumidor")
