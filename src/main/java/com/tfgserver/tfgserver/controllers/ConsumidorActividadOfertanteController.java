@@ -28,6 +28,18 @@ public class ConsumidorActividadOfertanteController {
         consumidorActividadOfertanteDAO.deleteById(id);
     }
 
+
+
+    @DeleteMapping("/consumidor-actividad-ofertante/delete-by-ids")
+    public void deleteByIds(@RequestParam int idActividad, @RequestParam int idConsumidor){
+        List<ConsumidorActividadOfertante> lista = getAllConsumidoresActividadesOfertantes();
+        for(ConsumidorActividadOfertante c : lista){
+            if(c.getConsumidor().getIdConsumidor()==idConsumidor && c.getActividadOfertante().getIdActividadOfertante()==idActividad){
+                deleteById(c.getIdConsumidorActividadOfertante());
+            }
+        }
+    }
+
     @PutMapping("/consumidor-actividad-ofertante/update")
     public ConsumidorActividadOfertante update(@RequestParam int id,@RequestBody ConsumidorActividadOfertante consumidorActividadOfertante){
         ConsumidorActividadOfertante updateConsumidorActividadOfertante = consumidorActividadOfertanteDAO.getById(id);

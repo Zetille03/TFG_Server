@@ -1,9 +1,6 @@
 package com.tfgserver.tfgserver.controllers;
 
-import com.tfgserver.tfgserver.dao.ActividadConsumidorDao;
-import com.tfgserver.tfgserver.dao.ActividadOfertanteDAO;
-import com.tfgserver.tfgserver.dao.ConsumidorActividadOfertanteDAO;
-import com.tfgserver.tfgserver.dao.ConsumidorDAO;
+import com.tfgserver.tfgserver.dao.*;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.consumidor.ActividadConsumidor;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
@@ -26,9 +23,8 @@ public class ActividadConsumidorController {
     private ConsumidorDAO consumidorDAO;
 
     @Autowired
-    private ConsumidorActividadOfertanteDAO consumidorActividadOfertanteDAO;
-    @Autowired
-    private ActividadOfertanteDAO actividadOfertanteDAO;
+    private OfertanteDAO ofertanteDAO;
+
 
     @GetMapping("/actividad-consumidor/get-all")
     public List<ActividadConsumidor> getAllActividadesConsumidor(){
@@ -46,17 +42,16 @@ public class ActividadConsumidorController {
     }
 
 
-
-    @GetMapping("/actividad-ofertante/get-apuntado")
-    public List<ActividadOfertante> getActividadesOfertantesByConsumidor(@RequestParam("consumidorId") int idConsumidor){
-        List<ConsumidorActividadOfertante> actividadesRelaciones = consumidorActividadOfertanteDAO.getAllConsumidoresActividadesOfertantes();
-        List<ActividadOfertante> actividadesOfertantes = new ArrayList<>();
-        for(ConsumidorActividadOfertante a : actividadesRelaciones){
-            if(a.getConsumidor().getIdConsumidor()==idConsumidor)
-                actividadesOfertantes.add(actividadOfertanteDAO.getById(a.getActividadOfertante().getIdActividadOfertante()));
+    @GetMapping("/actividad-consumidor/get-apuntado")
+    public List<ActividadConsumidor> getActividadesConsumidoresByOfertante(@RequestParam("ofertanteId") int ofertanteId){
+        List<ActividadConsumidor> actividades = new ArrayList<>();
+        Ofertante ofertante = ofertanteDAO.getById(ofertanteId);
+        for(ActividadConsumidor actividad : actividadConsumidorDAO.getAllActividadesConsumidores()){
+            if(actividad.getOfertanteActividadConsumidor().equals(ofertante)) actividades.add(actividad);
         }
-        return actividadesOfertantes;
+        return actividades;
     }
+
 
 
     @PostMapping("/actividad-consumidor/save")
@@ -79,10 +74,29 @@ public class ActividadConsumidorController {
         updateActividadConsumidor.setDescripcion(actividadConsumidor.getDescripcion());
         updateActividadConsumidor.setCategoria(actividadConsumidor.getCategoria());
         updateActividadConsumidor.setDueDate(actividadConsumidor.getDueDate());
-        updateActividadConsumidor.setNumeroPlazas(actividadConsumidor.getNumeroPlazas());
         updateActividadConsumidor.setConsumidor(actividadConsumidor.getConsumidor());
 
         return  actividadConsumidorDAO.save(updateActividadConsumidor);
+    }
+
+    @PutMapping("/actividad-consumidor/update-ofertante")
+    public ActividadConsumidor updateOfertante(@RequestParam int idActividad, @RequestParam int idOfertante){
+        ActividadConsumidor updateActividadConsumidor = actividadConsumidorDAO.getById(idActividad);
+        Ofertante ofertante = new Ofertante();
+        ofertante.setIdOfertante(idOfertante);
+
+        updateActividadConsumidor.setOfertanteActividadConsumidor(ofertante);
+
+        return actividadConsumidorDAO.save(updateActividadConsumidor);
+    }
+
+    @PutMapping("/actividad-consumidor/delete-ofertante")
+    public ActividadConsumidor deleteOfertante(@RequestParam int idActividad){
+        ActividadConsumidor updateActividadConsumidor = actividadConsumidorDAO.getById(idActividad);
+
+        updateActividadConsumidor.setOfertanteActividadConsumidor(null);
+
+        return actividadConsumidorDAO.save(updateActividadConsumidor);
     }
 
 }

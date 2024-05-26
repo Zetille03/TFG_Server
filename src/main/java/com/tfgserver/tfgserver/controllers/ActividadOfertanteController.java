@@ -1,7 +1,9 @@
 package com.tfgserver.tfgserver.controllers;
 
 import com.tfgserver.tfgserver.dao.ActividadOfertanteDAO;
+import com.tfgserver.tfgserver.dao.ConsumidorActividadOfertanteDAO;
 import com.tfgserver.tfgserver.dao.OfertanteDAO;
+import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class ActividadOfertanteController {
     @Autowired
     private OfertanteDAO ofertanteDAO;
 
+    @Autowired
+    private ConsumidorActividadOfertanteDAO consumidorActividadOfertanteDAO;
+
     @GetMapping("/actividad-ofertante/get-all")
     public List<ActividadOfertante> getAllActividadesOfertanes(){
         return actividadOfertanteDAO.getAllActividadesOfertantes();
@@ -32,6 +37,18 @@ public class ActividadOfertanteController {
         }
         return actividades;
     }
+
+    @GetMapping("/actividad-ofertante/get-apuntado")
+    public List<ActividadOfertante> getActividadesOfertantesByConsumidor(@RequestParam("consumidorId") int idConsumidor){
+        List<ConsumidorActividadOfertante> actividadesRelaciones = consumidorActividadOfertanteDAO.getAllConsumidoresActividadesOfertantes();
+        List<ActividadOfertante> actividadesOfertantes = new ArrayList<>();
+        for(ConsumidorActividadOfertante a : actividadesRelaciones){
+            if(a.getConsumidor().getIdConsumidor()==idConsumidor)
+                actividadesOfertantes.add(actividadOfertanteDAO.getById(a.getActividadOfertante().getIdActividadOfertante()));
+        }
+        return actividadesOfertantes;
+    }
+
 
     @PostMapping("/actividad-ofertante/save")
     public ActividadOfertante save(@RequestBody ActividadOfertante actividadOfertante){

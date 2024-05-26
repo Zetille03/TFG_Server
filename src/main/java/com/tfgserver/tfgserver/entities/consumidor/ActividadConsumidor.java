@@ -40,9 +40,6 @@ public class ActividadConsumidor implements Serializable {
     @Column
     private String categoria;
 
-    @Basic
-    @Column
-    private int numeroPlazas;
 
     @ManyToOne(cascade = {/*CascadeType.PERSIST,*/CascadeType.MERGE} )
     @JsonIgnoreProperties("listaActividadesDeConsumidor")
