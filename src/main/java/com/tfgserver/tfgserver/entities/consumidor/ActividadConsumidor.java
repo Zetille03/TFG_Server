@@ -3,6 +3,7 @@ package com.tfgserver.tfgserver.entities.consumidor;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tfgserver.tfgserver.entities.OfertanteActividadFavorita;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -50,6 +52,12 @@ public class ActividadConsumidor implements Serializable {
     @JoinColumn(name="idOfertante")
     @JsonIgnoreProperties("listaActividadesConsumidor")
     private Ofertante ofertanteActividadConsumidor;
+
+
+    @OneToMany(cascade = {CascadeType.MERGE} ,
+            mappedBy = "actividadConsumidor", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("actividadConsumidor")
+    private List<OfertanteActividadFavorita> listaOfertanteActividadesFavoritas;
 
 
 

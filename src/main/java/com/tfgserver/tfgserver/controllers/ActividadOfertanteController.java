@@ -1,11 +1,12 @@
 package com.tfgserver.tfgserver.controllers;
 
-import com.tfgserver.tfgserver.dao.ActividadOfertanteDAO;
-import com.tfgserver.tfgserver.dao.ConsumidorActividadOfertanteDAO;
-import com.tfgserver.tfgserver.dao.OfertanteDAO;
+import com.tfgserver.tfgserver.dao.*;
+import com.tfgserver.tfgserver.entities.ConsumidorActividadFavorita;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
+import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,11 @@ public class ActividadOfertanteController {
 
     @Autowired
     private ConsumidorActividadOfertanteDAO consumidorActividadOfertanteDAO;
+    @Autowired
+    private ConsumidorDAO consumidorDAO;
+
+    @Autowired
+    private ConsumidorActividadFavoritaDAO consumidorActividadFavoritaDAO;
 
     @GetMapping("/actividad-ofertante/get-all")
     public List<ActividadOfertante> getAllActividadesOfertanes(){
@@ -47,6 +53,17 @@ public class ActividadOfertanteController {
                 actividadesOfertantes.add(actividadOfertanteDAO.getById(a.getActividadOfertante().getIdActividadOfertante()));
         }
         return actividadesOfertantes;
+    }
+
+    @GetMapping("/actividad-ofertante/get-favoritas")
+    public List<ActividadOfertante> getActividadesFavoritasByConsumidor(@RequestParam("consumidorId") int consumidorId){
+        List<ActividadOfertante> actividades = new ArrayList<>();
+        for(ConsumidorActividadFavorita act: consumidorActividadFavoritaDAO.getAllConsumidorActividadesFavoritas()){
+            if(act.getConsumidor().getIdConsumidor()==consumidorId){
+                actividades.add(actividadOfertanteDAO.getById(act.getActividadOfertante().getIdActividadOfertante()));
+            }
+        }
+        return actividades;
     }
 
 

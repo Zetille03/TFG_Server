@@ -2,6 +2,7 @@ package com.tfgserver.tfgserver.controllers;
 
 import com.tfgserver.tfgserver.dao.*;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
+import com.tfgserver.tfgserver.entities.OfertanteActividadFavorita;
 import com.tfgserver.tfgserver.entities.consumidor.ActividadConsumidor;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
@@ -25,6 +26,11 @@ public class ActividadConsumidorController {
     @Autowired
     private OfertanteDAO ofertanteDAO;
 
+    @Autowired
+    private OfertanteActividadFavoritaDAO ofertanteActividadFavoritaDAO;
+    @Autowired
+    private ActividadOfertanteDAO actividadOfertanteDAO;
+
 
     @GetMapping("/actividad-consumidor/get-all")
     public List<ActividadConsumidor> getAllActividadesConsumidor(){
@@ -42,12 +48,27 @@ public class ActividadConsumidorController {
     }
 
 
+
+
     @GetMapping("/actividad-consumidor/get-apuntado")
     public List<ActividadConsumidor> getActividadesConsumidoresByOfertante(@RequestParam("ofertanteId") int ofertanteId){
         List<ActividadConsumidor> actividades = new ArrayList<>();
-        Ofertante ofertante = ofertanteDAO.getById(ofertanteId);
         for(ActividadConsumidor actividad : actividadConsumidorDAO.getAllActividadesConsumidores()){
-            if(actividad.getOfertanteActividadConsumidor().equals(ofertante)) actividades.add(actividad);
+            if(actividad.getOfertanteActividadConsumidor().getIdOfertante()==ofertanteId) {
+                actividades.add(actividad);
+            }
+        }
+        return actividades;
+    }
+
+    @GetMapping("/actividad-consumidor/get-favoritas")
+    public List<ActividadConsumidor> getActividadesFavoritasByOfertante(@RequestParam("ofertanteId") int ofertanteId){
+        List<OfertanteActividadFavorita> listaRelaciones = ofertanteActividadFavoritaDAO.getAllOfertanteActividadesFavoritas();
+        List<ActividadConsumidor> actividades = new ArrayList<>();
+        for(OfertanteActividadFavorita act: listaRelaciones){
+            if(act.getOfertante().getIdOfertante()==ofertanteId){
+                actividades.add(actividadConsumidorDAO.getById(act.getOfertante().getIdOfertante()));
+            }
         }
         return actividades;
     }

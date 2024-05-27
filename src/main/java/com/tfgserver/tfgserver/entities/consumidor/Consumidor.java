@@ -2,6 +2,7 @@ package com.tfgserver.tfgserver.entities.consumidor;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tfgserver.tfgserver.entities.ConsumidorActividadFavorita;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import jakarta.persistence.*;
@@ -51,6 +52,11 @@ public class Consumidor implements Serializable {
             mappedBy = "consumidor", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("consumidor")
     private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
+
+    @OneToMany(cascade = {CascadeType.MERGE} ,
+                mappedBy = "consumidor", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("consumidor")
+    private List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas;
 
 //    @Override
 //    public String toString() {

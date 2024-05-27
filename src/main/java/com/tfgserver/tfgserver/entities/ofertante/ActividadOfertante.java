@@ -2,6 +2,7 @@ package com.tfgserver.tfgserver.entities.ofertante;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tfgserver.tfgserver.entities.ConsumidorActividadFavorita;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import jakarta.persistence.*;
@@ -23,7 +24,7 @@ import java.util.Set;
 public class ActividadOfertante implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idActividadesOfertantes")
+    @Column(name="idActividadOfertante")
     private int idActividadOfertante;
 
     @Basic
@@ -54,6 +55,11 @@ public class ActividadOfertante implements Serializable {
 
     @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
             mappedBy = "actividadOfertante",fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("listaActividadesConsumidor")
+    @JsonIgnoreProperties("actividadOfertante")
     private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
+
+    @OneToMany(cascade = {CascadeType.MERGE} ,
+            mappedBy = "actividadOfertante", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("consumidor")
+    private List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas;
 }
