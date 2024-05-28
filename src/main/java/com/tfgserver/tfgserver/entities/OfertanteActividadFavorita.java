@@ -19,11 +19,11 @@ public class OfertanteActividadFavorita {
 
     @ManyToOne
     @JoinColumn(name = "idActividadConsumidor")
-    @JsonIgnoreProperties("listaOfertanteActividadesFavoritas")
+    @JsonIgnoreProperties({"listaOfertanteActividadesFavoritas","consumidor","ofertanteActividadConsumidor"})
     private ActividadConsumidor actividadConsumidor;
 
     @ManyToOne
     @JoinColumn(name = "idOfertante")
-    @JsonIgnoreProperties("listaOfertanteActividadesFavoritas")
+    @JsonIgnoreProperties({"listaOfertanteActividadesFavoritas","listaActividadesOfertante","listaActividadesConsumidor"})
     private Ofertante ofertante;
 }

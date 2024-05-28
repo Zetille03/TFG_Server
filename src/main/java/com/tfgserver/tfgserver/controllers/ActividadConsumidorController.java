@@ -54,7 +54,7 @@ public class ActividadConsumidorController {
     public List<ActividadConsumidor> getActividadesConsumidoresByOfertante(@RequestParam("ofertanteId") int ofertanteId){
         List<ActividadConsumidor> actividades = new ArrayList<>();
         for(ActividadConsumidor actividad : actividadConsumidorDAO.getAllActividadesConsumidores()){
-            if(actividad.getOfertanteActividadConsumidor().getIdOfertante()==ofertanteId) {
+            if (actividad.getOfertanteActividadConsumidor() != null && actividad.getOfertanteActividadConsumidor().getIdOfertante() == ofertanteId) {
                 actividades.add(actividad);
             }
         }
@@ -103,8 +103,7 @@ public class ActividadConsumidorController {
     @PutMapping("/actividad-consumidor/update-ofertante")
     public ActividadConsumidor updateOfertante(@RequestParam int idActividad, @RequestParam int idOfertante){
         ActividadConsumidor updateActividadConsumidor = actividadConsumidorDAO.getById(idActividad);
-        Ofertante ofertante = new Ofertante();
-        ofertante.setIdOfertante(idOfertante);
+        Ofertante ofertante = ofertanteDAO.getById(idOfertante);
 
         updateActividadConsumidor.setOfertanteActividadConsumidor(ofertante);
 

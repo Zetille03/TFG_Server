@@ -60,6 +60,6 @@ public class ActividadOfertante implements Serializable {
 
     @OneToMany(cascade = {CascadeType.MERGE} ,
             mappedBy = "actividadOfertante", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("consumidor")
+    @JsonIgnoreProperties("actividadOfertante")
     private List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas;
 }
