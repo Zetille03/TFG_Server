@@ -40,17 +40,17 @@ public class Ofertante implements Serializable {
     @NotEmpty
     private String password;
 
-    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
+    @OneToMany(/*cascade = {CascadeType.MERGE} ,*/
             mappedBy = "ofertante",fetch = FetchType.EAGER)
     @JsonIgnoreProperties("ofertante")
     private List<ActividadOfertante> listaActividadesOfertante;
 
-    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
+    @OneToMany(/*cascade = {CascadeType.MERGE} ,*/
             mappedBy = "ofertanteActividadConsumidor",fetch = FetchType.EAGER)
     @JsonIgnoreProperties("ofertanteActividadConsumidor")
     private List<ActividadConsumidor> listaActividadesConsumidor;
 
-    @OneToMany(cascade = {CascadeType.MERGE} ,
+    @OneToMany(/*cascade = {CascadeType.MERGE} ,*/
             mappedBy = "ofertante", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("ofertante")
     private List<OfertanteActividadFavorita> listaOfertanteActividadesFavoritas;

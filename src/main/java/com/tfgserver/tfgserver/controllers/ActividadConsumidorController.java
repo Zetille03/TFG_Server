@@ -67,7 +67,7 @@ public class ActividadConsumidorController {
         List<ActividadConsumidor> actividades = new ArrayList<>();
         for(OfertanteActividadFavorita act: listaRelaciones){
             if(act.getOfertante().getIdOfertante()==ofertanteId){
-                actividades.add(actividadConsumidorDAO.getById(act.getOfertante().getIdOfertante()));
+                actividades.add(actividadConsumidorDAO.getById(act.getActividadConsumidor().getIdActividadConsumidor()));
             }
         }
         return actividades;
@@ -95,7 +95,6 @@ public class ActividadConsumidorController {
         updateActividadConsumidor.setDescripcion(actividadConsumidor.getDescripcion());
         updateActividadConsumidor.setCategoria(actividadConsumidor.getCategoria());
         updateActividadConsumidor.setDueDate(actividadConsumidor.getDueDate());
-        updateActividadConsumidor.setConsumidor(actividadConsumidor.getConsumidor());
 
         return  actividadConsumidorDAO.save(updateActividadConsumidor);
     }

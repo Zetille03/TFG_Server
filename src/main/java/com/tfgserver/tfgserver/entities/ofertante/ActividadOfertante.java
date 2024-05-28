@@ -48,17 +48,17 @@ public class ActividadOfertante implements Serializable {
     private int numeroPlazas;
 
 
-    @ManyToOne(cascade = {/*CascadeType.PERSIST,*/CascadeType.MERGE} )
+    @ManyToOne/*(cascade = {CascadeType.MERGE} )*/
     @JoinColumn(name="idOfertante")
     @JsonIgnoreProperties("listaActividadesOfertante")
     private Ofertante ofertante;
 
-    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
+    @OneToMany(cascade = {CascadeType.REMOVE},
             mappedBy = "actividadOfertante",fetch = FetchType.EAGER)
     @JsonIgnoreProperties("actividadOfertante")
     private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
 
-    @OneToMany(cascade = {CascadeType.MERGE} ,
+    @OneToMany(cascade = {CascadeType.REMOVE} ,
             mappedBy = "actividadOfertante", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("actividadOfertante")
     private List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas;

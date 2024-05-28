@@ -42,31 +42,20 @@ public class Consumidor implements Serializable {
     @NotEmpty
     private String password;
 
-    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
+    @OneToMany(/*cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,*/
             mappedBy = "consumidor", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("consumidor")
     private List<ActividadConsumidor> listaActividadesDeConsumidor;
 
 
-    @OneToMany(cascade = {/*CascadeType.PERSIST,*/ CascadeType.MERGE} ,
+    @OneToMany(/*cascade = {CascadeType.MERGE} ,*/
             mappedBy = "consumidor", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("consumidor")
     private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
 
-    @OneToMany(cascade = {CascadeType.MERGE} ,
+    @OneToMany(/*cascade = {CascadeType.MERGE} ,*/
                 mappedBy = "consumidor", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("consumidor")
     private List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas;
 
-//    @Override
-//    public String toString() {
-//        return "Consumidor{" +
-//                "idConsumidor=" + idConsumidor +
-//                ", username='" + username + '\'' +
-//                ", email='" + email + '\'' +
-//                ", password='" + password + '\'' +
-//                ", listaActividadesDeConsumidor=" + ((listaActividadesDeConsumidor!=null)?listaActividadesDeConsumidor.size():0) +
-//                ", listaConsumidoresActividadOfertantes=" +  ((listaConsumidoresActividadOfertantes!=null)?listaConsumidoresActividadOfertantes.size():0) +
-//                '}';
-//    }
 }

@@ -86,7 +86,6 @@ public class ActividadOfertanteController {
         updateActividadOfertante.setCategoria(actividadOfertante.getCategoria());
         updateActividadOfertante.setDueDate(actividadOfertante.getDueDate());
         updateActividadOfertante.setNumeroPlazas(actividadOfertante.getNumeroPlazas());
-        updateActividadOfertante.setOfertante(actividadOfertante.getOfertante());
 
         return actividadOfertanteDAO.save(updateActividadOfertante);
     }
