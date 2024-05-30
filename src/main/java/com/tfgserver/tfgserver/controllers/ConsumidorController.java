@@ -36,13 +36,13 @@ public class ConsumidorController {
 
     @PutMapping("/consumidor/update")
     public Consumidor update(@RequestParam int id,@RequestBody Consumidor consumidor){
-        Consumidor updateOfertante = consumidorDAO.getById(id);
+        Consumidor updateConsumidor = consumidorDAO.getById(id);
 
-        updateOfertante.setEmail(consumidor.getEmail());
-        updateOfertante.setUsername(consumidor.getUsername());
-        updateOfertante.setPassword(consumidor.getPassword());
+        updateConsumidor.setEmail(consumidor.getEmail());
+        updateConsumidor.setUsername(consumidor.getUsername());
+        updateConsumidor.setPassword(consumidor.getPassword());
 
-        return consumidorDAO.save(updateOfertante);
+        return consumidorDAO.save(updateConsumidor);
     }
 
 }

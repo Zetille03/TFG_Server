@@ -52,13 +52,8 @@ public class ActividadConsumidorController {
 
     @GetMapping("/actividad-consumidor/get-apuntado")
     public List<ActividadConsumidor> getActividadesConsumidoresByOfertante(@RequestParam("ofertanteId") int ofertanteId){
-        List<ActividadConsumidor> actividades = new ArrayList<>();
-        for(ActividadConsumidor actividad : actividadConsumidorDAO.getAllActividadesConsumidores()){
-            if (actividad.getOfertanteActividadConsumidor() != null && actividad.getOfertanteActividadConsumidor().getIdOfertante() == ofertanteId) {
-                actividades.add(actividad);
-            }
-        }
-        return actividades;
+
+        return actividadConsumidorDAO.getActividadesConsumidoresByOfertante(ofertanteId);
     }
 
     @GetMapping("/actividad-consumidor/get-favoritas")

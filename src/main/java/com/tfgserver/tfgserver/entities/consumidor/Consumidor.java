@@ -42,20 +42,20 @@ public class Consumidor implements Serializable {
     @NotEmpty
     private String password;
 
-    @OneToMany(/*cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,*/
+    @OneToMany(cascade =  CascadeType.REMOVE ,
             mappedBy = "consumidor", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("consumidor")
+    @JsonIgnoreProperties({"consumidor","ofertanteActividadConsumidor"})
     private List<ActividadConsumidor> listaActividadesDeConsumidor;
 
 
-    @OneToMany(/*cascade = {CascadeType.MERGE} ,*/
+    @OneToMany(cascade = {CascadeType.REMOVE} ,
             mappedBy = "consumidor", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("consumidor")
     private List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes;
 
-    @OneToMany(/*cascade = {CascadeType.MERGE} ,*/
+    @OneToMany(cascade = {CascadeType.REMOVE} ,
                 mappedBy = "consumidor", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("consumidor")
+    @JsonIgnoreProperties({"consumidor"})
     private List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas;
 
 }

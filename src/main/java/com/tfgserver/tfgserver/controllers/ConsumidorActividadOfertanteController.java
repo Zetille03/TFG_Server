@@ -10,6 +10,7 @@ import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class ConsumidorActividadOfertanteController {
         actividadOfertante.setIdActividadOfertante(idActividad);
         consumidorActividadOfertante.setConsumidor(consumidor);
         consumidorActividadOfertante.setActividadOfertante(actividadOfertante);
+
         ConsumidorActividadOfertante c = consumidorActividadOfertanteDAO.save(consumidorActividadOfertante);
         if(c != null){
             c.setActividadOfertante(actividadOfertanteDAO.getById(c.getActividadOfertante().getIdActividadOfertante()));
@@ -73,7 +75,7 @@ public class ConsumidorActividadOfertanteController {
         }
         return actividadDevolver;
     }
-
+    @Async
     @PutMapping("/consumidor-actividad-ofertante/update")
     public ConsumidorActividadOfertante update(@RequestParam int id,@RequestBody ConsumidorActividadOfertante consumidorActividadOfertante){
         ConsumidorActividadOfertante updateConsumidorActividadOfertante = consumidorActividadOfertanteDAO.getById(id);

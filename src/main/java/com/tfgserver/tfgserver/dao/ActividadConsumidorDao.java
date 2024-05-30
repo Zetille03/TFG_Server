@@ -30,12 +30,27 @@ public class ActividadConsumidorDao {
         return existsById(actividadConsumidor.getIdActividadConsumidor());
     }
 
+
+
     public boolean existsById(int id){
         return repository.existsById(id);
     }
 
     public List<ActividadConsumidor> getAllActividadesConsumidores(){
         return Lists.newArrayList(repository.findAll());
+    }
+
+    public List<ActividadConsumidor> getActividadesConsumidoresByOfertante(int idOfertante){
+        List<ActividadConsumidor> actividades = Lists.newArrayList();
+        for(ActividadConsumidor act : repository.findAll()){
+            if(act.getOfertanteActividadConsumidor()!=null){
+                if(act.getOfertanteActividadConsumidor().getIdOfertante()==idOfertante){
+                    actividades.add(act);
+                }
+            }
+
+        }
+        return actividades;
     }
 
     public ActividadConsumidor getById(int id){

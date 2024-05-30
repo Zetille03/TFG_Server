@@ -1,6 +1,8 @@
 package com.tfgserver.tfgserver.controllers;
 
+import com.tfgserver.tfgserver.dao.ActividadConsumidorDao;
 import com.tfgserver.tfgserver.dao.OfertanteDAO;
+import com.tfgserver.tfgserver.entities.consumidor.ActividadConsumidor;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import java.util.List;
 public class OfertanteController {
     @Autowired
     private OfertanteDAO ofertanteDAO;
+    @Autowired
+    private ActividadConsumidorDao actividadConsumidorDao;
 
     @GetMapping("/ofertante/get-all")
     public List<Ofertante> getAll() {
@@ -30,6 +34,9 @@ public class OfertanteController {
 
     @DeleteMapping("/ofertante/delete")
     public void delete(@RequestParam int id){
+        for(ActividadConsumidor act: actividadConsumidorDao.getActividadesConsumidoresByOfertante(id)){
+            act.setOfertanteActividadConsumidor(null);
+        }
         ofertanteDAO.deleteById(id);
     }
 

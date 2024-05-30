@@ -21,7 +21,7 @@ public class ConsumidorActividadOfertante implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "idActividadOfertante")
-    @JsonIgnoreProperties("listaConsumidoresActividadOfertantes")
+    @JsonIgnoreProperties({"listaConsumidoresActividadOfertantes"})
     private ActividadOfertante actividadOfertante;
 
     @ManyToOne
