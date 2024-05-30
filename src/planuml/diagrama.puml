@@ -1,0 +1,88 @@
+@startuml
+!define ENTITY(x) class x << (E,#FFAAAA) >>
+ENTITY(ActividadConsumidor) {
+    +int idActividadConsumidor
+    +String titulo
+    +String descripcion
+    +Date dueDate
+    +String categoria
+    +Consumidor consumidor
+    +Ofertante ofertanteActividadConsumidor
+    +List<OfertanteActividadFavorita> listaOfertanteActividadesFavoritas
+}
+
+ENTITY(Consumidor) {
+    +int idConsumidor
+    +String username
+    +String email
+    +String password
+    +List<ActividadConsumidor> listaActividadesDeConsumidor
+    +List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes
+    +List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas
+}
+
+ENTITY(ActividadOfertante) {
+    +int idActividadOfertante
+    +String titulo
+    +String descripcion
+    +Date dueDate
+    +String categoria
+    +int numeroPlazas
+    +Ofertante ofertante
+    +List<ConsumidorActividadOfertante> listaConsumidoresActividadOfertantes
+    +List<ConsumidorActividadFavorita> listaConsumidorActivadesFavoritas
+}
+
+ENTITY(Ofertante) {
+    +int idOfertante
+    +String username
+    +String email
+    +String password
+    +List<ActividadOfertante> listaActividadesOfertante
+    +List<ActividadConsumidor> listaActividadesConsumidor
+    +List<OfertanteActividadFavorita> listaOfertanteActividadesFavoritas
+}
+
+ENTITY(ConsumidorActividadFavorita) {
+    +int idConsumidorActividadFavorita
+    +ActividadOfertante actividadOfertante
+    +Consumidor consumidor
+}
+
+ENTITY(ConsumidorActividadOfertante) {
+    +int idConsumidorActividadOfertante
+    +ActividadOfertante actividadOfertante
+    +Consumidor consumidor
+}
+
+ENTITY(OfertanteActividadFavorita) {
+    +int idOfertanteActividadFavorita
+    +ActividadConsumidor actividadConsumidor
+    +Ofertante ofertante
+}
+
+ActividadConsumidor --> Consumidor : consumidor
+ActividadConsumidor --> Ofertante : ofertanteActividadConsumidor
+ActividadConsumidor --> OfertanteActividadFavorita : listaOfertanteActividadesFavoritas
+
+Consumidor --> ActividadConsumidor : listaActividadesDeConsumidor
+Consumidor --> ConsumidorActividadOfertante : listaConsumidoresActividadOfertantes
+Consumidor --> ConsumidorActividadFavorita : listaConsumidorActivadesFavoritas
+
+ActividadOfertante --> Ofertante : ofertante
+ActividadOfertante --> ConsumidorActividadOfertante : listaConsumidoresActividadOfertantes
+ActividadOfertante --> ConsumidorActividadFavorita : listaConsumidorActivadesFavoritas
+
+Ofertante --> ActividadOfertante : listaActividadesOfertante
+Ofertante --> ActividadConsumidor : listaActividadesConsumidor
+Ofertante --> OfertanteActividadFavorita : listaOfertanteActividadesFavoritas
+
+ConsumidorActividadFavorita --> ActividadOfertante : actividadOfertante
+ConsumidorActividadFavorita --> Consumidor : consumidor
+
+ConsumidorActividadOfertante --> ActividadOfertante : actividadOfertante
+ConsumidorActividadOfertante --> Consumidor : consumidor
+
+OfertanteActividadFavorita --> ActividadConsumidor : actividadConsumidor
+OfertanteActividadFavorita --> Ofertante : ofertante
+@enduml

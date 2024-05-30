@@ -59,8 +59,4 @@ public class ActividadConsumidor implements Serializable {
     @JsonIgnoreProperties("actividadConsumidor")
     private List<OfertanteActividadFavorita> listaOfertanteActividadesFavoritas;
 
-
-
-
-
 }
