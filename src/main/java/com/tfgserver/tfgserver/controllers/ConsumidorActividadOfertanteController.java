@@ -9,6 +9,7 @@ import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Tag(name="Consumidor Actividad Ofertante")
 public class ConsumidorActividadOfertanteController {
 
     @Autowired

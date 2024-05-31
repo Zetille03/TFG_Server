@@ -3,12 +3,14 @@ package com.tfgserver.tfgserver.controllers;
 import com.tfgserver.tfgserver.dao.ConsumidorDAO;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Tag(name="Consumidor")
 public class ConsumidorController {
 
     @Autowired

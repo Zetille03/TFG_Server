@@ -7,6 +7,7 @@ import com.tfgserver.tfgserver.entities.consumidor.ActividadConsumidor;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
 import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import com.tfgserver.tfgserver.entities.ofertante.Ofertante;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@Tag(name="Actividad Consumidor")
 public class ActividadConsumidorController {
     @Autowired
     private ActividadConsumidorDao actividadConsumidorDAO;

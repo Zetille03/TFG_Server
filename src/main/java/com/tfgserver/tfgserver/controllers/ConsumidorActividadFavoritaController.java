@@ -2,12 +2,14 @@ package com.tfgserver.tfgserver.controllers;
 
 import com.tfgserver.tfgserver.dao.ConsumidorActividadFavoritaDAO;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadFavorita;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Tag(name="Consumidor Actividad Favorita")
 public class ConsumidorActividadFavoritaController {
     @Autowired
     private ConsumidorActividadFavoritaDAO consumidorActividadFavoritaDAO;
