@@ -98,12 +98,18 @@ public class ActividadConsumidorController {
 
     @PutMapping("/actividad-consumidor/update-ofertante")
     public ActividadConsumidor updateOfertante(@RequestParam int idActividad, @RequestParam int idOfertante){
+
         ActividadConsumidor updateActividadConsumidor = actividadConsumidorDAO.getById(idActividad);
-        Ofertante ofertante = ofertanteDAO.getById(idOfertante);
+        if(updateActividadConsumidor.getOfertanteActividadConsumidor()==null){
+            Ofertante ofertante = ofertanteDAO.getById(idOfertante);
 
-        updateActividadConsumidor.setOfertanteActividadConsumidor(ofertante);
+            updateActividadConsumidor.setOfertanteActividadConsumidor(ofertante);
 
-        return actividadConsumidorDAO.save(updateActividadConsumidor);
+            return actividadConsumidorDAO.save(updateActividadConsumidor);
+        }else{
+            return null;
+        }
+
     }
 
     @PutMapping("/actividad-consumidor/delete-ofertante")

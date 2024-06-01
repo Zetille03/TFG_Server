@@ -1,9 +1,6 @@
 package com.tfgserver.tfgserver.controllers;
 
-import com.tfgserver.tfgserver.dao.ActividadOfertanteDAO;
-import com.tfgserver.tfgserver.dao.ConsumidorActividadOfertanteDAO;
-import com.tfgserver.tfgserver.dao.ConsumidorDAO;
-import com.tfgserver.tfgserver.dao.OfertanteDAO;
+import com.tfgserver.tfgserver.dao.*;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadFavorita;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadOfertante;
 import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
@@ -28,6 +25,8 @@ public class ConsumidorActividadOfertanteController {
     private ConsumidorDAO consumidorDAO;
     @Autowired
     private OfertanteDAO ofertanteDAO;
+    @Autowired
+    private ActividadConsumidorDao actividadConsumidorDao;
 
 
     @GetMapping("/consumidor-actividad-ofertante/get-all")
@@ -44,18 +43,20 @@ public class ConsumidorActividadOfertanteController {
         actividadOfertante.setIdActividadOfertante(idActividad);
         consumidorActividadOfertante.setConsumidor(consumidor);
         consumidorActividadOfertante.setActividadOfertante(actividadOfertante);
-
-        ConsumidorActividadOfertante c = consumidorActividadOfertanteDAO.save(consumidorActividadOfertante);
-        if(c != null){
-            c.setActividadOfertante(actividadOfertanteDAO.getById(c.getActividadOfertante().getIdActividadOfertante()));
-            c.setConsumidor(consumidorDAO.getById(c.getConsumidor().getIdConsumidor()));
-            Ofertante o = ofertanteDAO.getById(c.getActividadOfertante().getOfertante().getIdOfertante());
-            c.getActividadOfertante().setOfertante(o);
+        ActividadOfertante actComprobarSize = actividadOfertanteDAO.getById(idActividad);
+        if(actComprobarSize==null || actComprobarSize.getListaConsumidoresActividadOfertantes().size() >= actComprobarSize.getNumeroPlazas()){
+            return null;
+        }else{
+            ConsumidorActividadOfertante c = consumidorActividadOfertanteDAO.save(consumidorActividadOfertante);
+            if(c != null){
+                c.setActividadOfertante(actividadOfertanteDAO.getById(c.getActividadOfertante().getIdActividadOfertante()));
+                c.setConsumidor(consumidorDAO.getById(c.getConsumidor().getIdConsumidor()));
+                Ofertante o = ofertanteDAO.getById(c.getActividadOfertante().getOfertante().getIdOfertante());
+                c.getActividadOfertante().setOfertante(o);
+                return c;
+            }
         }
-
-
-        return c;
-
+        return null;
     }
 
     @DeleteMapping("/consumidor-actividad-ofertante/delete")
