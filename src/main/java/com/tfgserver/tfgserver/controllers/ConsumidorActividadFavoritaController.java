@@ -1,7 +1,11 @@
 package com.tfgserver.tfgserver.controllers;
 
+import com.tfgserver.tfgserver.dao.ActividadOfertanteDAO;
 import com.tfgserver.tfgserver.dao.ConsumidorActividadFavoritaDAO;
+import com.tfgserver.tfgserver.dao.ConsumidorDAO;
 import com.tfgserver.tfgserver.entities.ConsumidorActividadFavorita;
+import com.tfgserver.tfgserver.entities.consumidor.Consumidor;
+import com.tfgserver.tfgserver.entities.ofertante.ActividadOfertante;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,10 @@ import java.util.List;
 public class ConsumidorActividadFavoritaController {
     @Autowired
     private ConsumidorActividadFavoritaDAO consumidorActividadFavoritaDAO;
+    @Autowired
+    private ConsumidorDAO consumidorDAO;
+    @Autowired
+    private ActividadOfertanteDAO actividadOfertanteDAO;
 
     @GetMapping("/consumidor-actividad-favorita/get-all")
     public List<ConsumidorActividadFavorita> getAllConsumidorActividadesFavoritas(){
@@ -29,7 +37,14 @@ public class ConsumidorActividadFavoritaController {
     }
 
     @PostMapping("/consumidor-actividad-favorita/save")
-    public ConsumidorActividadFavorita save(@RequestBody ConsumidorActividadFavorita entity){
+    public ConsumidorActividadFavorita save(@RequestParam int idActividad,@RequestParam int idConsumidor){
+        ConsumidorActividadFavorita entity = new ConsumidorActividadFavorita();
+        Consumidor consumidor = new Consumidor();
+        consumidor.setIdConsumidor(idConsumidor);
+        ActividadOfertante actividad = new ActividadOfertante();
+        actividad.setIdActividadOfertante(idActividad);
+        entity.setConsumidor(consumidor);
+        entity.setActividadOfertante(actividad);
         return consumidorActividadFavoritaDAO.save(entity);
     }
 
